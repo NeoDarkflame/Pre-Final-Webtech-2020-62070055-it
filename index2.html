@@ -1,0 +1,95 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <style>
+        input{
+            width: 100%;
+        }
+        button{
+            border-radius: 3%;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h4>ระบุตำแหน่ง</h4>
+                <div class="row">
+                    <div class="col-md-10">
+                <input type="text" placeholder="Search.." name="search" id="name">
+            </div>
+            <div class="col-md-2">
+                <button onclick="search()" ><P>ค้นหา</P></button>
+            </div>
+            </div>
+            </div>
+        </div>
+        <div class="row mt-3" id="row">
+        </div>
+    </div>
+    <script>
+        let requestURL = 'ezquiz.json';
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                dataReportStatus(JSON.parse(request.responseText));
+            }
+        };
+        request.open("GET", requestURL, true);
+        request.send();
+        function dataReportStatus(data) {
+            let body = document.createElement('div');
+            body.setAttribute('class', 'row mt-3');
+            for (i = 0; i < data.tracks.items.length; i++) {
+                let col = document.createElement('div');
+                col.setAttribute('class', 'col-md-4 mt-3');
+                let card = document.createElement('div');
+                card.setAttribute('class', 'card border-1');
+                let cardimg = document.createElement('img');
+                cardimg.setAttribute('class', 'card-img-top');
+                cardimg.setAttribute('src', data.tracks.items[i].album.images[0].url);
+                card.appendChild(cardimg);
+                let cardbody = document.createElement('div');
+                cardbody.setAttribute('class', 'card-body');
+                let namesong = document.createElement('h5');
+                name
+                namesong.appendChild(document.createTextNode(data.tracks.items[i].album.name));
+                let namecrea = document.createElement('p');
+                namecrea.setAttribute('class', 'card-text');
+                namecrea.appendChild(document.createTextNode("Artists: " + data.tracks.items[i].album.artists[0].name));
+                namecrea.appendChild(document.createElement("br"));
+                namecrea.appendChild(document.createTextNode("Release date: " + data.tracks.items[i].album.release_date));
+                namecrea.appendChild(document.createElement("br"));
+                namecrea.appendChild(document.createTextNode("Avaliable: " + data.tracks.items[i].album.available_markets.length + "countries"));
+                cardbody.appendChild(namesong);
+                cardbody.appendChild(namecrea);
+                card.appendChild(cardbody);
+                col.appendChild(card);
+                document.getElementById('row').appendChild(col);
+            }
+            function search(data){
+                let body = document.createElement('div');
+                body.setAttribute('class', 'row mt-3');
+                if(getElementById(name)==){}
+                else if(){}
+
+            }
+
+
+        }
+    </script>
+
+</body>
+
+</html>
